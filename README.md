@@ -8,7 +8,7 @@ qbee-agent package for OpenWRT
 - In SDK directory, download Makefiles with git:
 
 ```sh
-git clone https://github.com/qbee-io/qbee-agent-openwrt package/qbee-agent-openwrt
+git clone https://github.com/qbee-io/qbee-agent-openwrt package/qbee-agent
 ```
 
 ```sh
