@@ -1,0 +1,46 @@
+#!/bin/sh /etc/rc.common
+
+
+START=99
+STOP=11
+USE_PROCD=1
+
+ARGS="start"
+
+start_service() {
+  pidof qbee-agent
+
+  if [ $? -eq 0 ]; then
+    return 0
+  fi
+
+  if [ ! -f /etc/qbee/qbee-agent.json ]; then
+    echo "Device seems to not have been bootstrapped. Please run 'qbee-agent bootstrap -k <bootstrap-key>' as root to bootstrap."
+    return 0
+  fi
+
+  procd_open_instance
+  # This should be a wrapper script so that we can handle signals gracefully,
+  # We need to run the restarts in the background so that we do not end up
+  # with a bricked system from qbee pov.
+  procd_set_param command /usr/bin/qbee-agent $ARGS
+  procd_set_param respawn 3600 60 0
+  procd_set_param stdout 1
+  procd_set_param stderr 1
+  procd_set_param pidfile /var/run/qbee-agent.pid
+  procd_close_instance
+}
+
+stop_service() {
+  # Should have a timeout here or detect if this is restart or stop
+  while [ -f /var/lib/qbee/app_workdir/config.lock ]; do
+    echo "INFO: Waiting for qbee-agent lock to be released"
+    sleep 2
+  done
+
+  pidof qbee-agent
+
+  if [ $? -eq 0 ]; then
+    return 0
+  fi
+}
