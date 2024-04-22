@@ -19,7 +19,7 @@ make defconfig
 make package/qbee-agent/compile
 ```
 
-- Package is available in the `bin/package` file structure
+- Package is available in the `bin/packages` file structure
 
 ```sh
 find bin/packages/ -name "qbee-agent*.ipk"
