@@ -3,25 +3,24 @@ qbee-agent package for OpenWRT
 
 ## Build Guide
 
-- Set up the OpenWRT SDK as described here [here](https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem)
+- Prepare the build environment as described [here](https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem)
 
-- In SDK directory, download Makefiles with git:
+- Install a recent version of the Go programming language from [here](https://go.dev/doc/install) and make sure you have `go` in the system path.
+
+- Download the SDK relevant to the OpenWRT version, target and subtarget from [here](https://archive.openwrt.org/releases)
+
+- In the untar'ed SDK directory, fetch this repo and build the qbee-agent package
 
 ```sh
+
 git clone https://github.com/qbee-io/qbee-agent-openwrt package/qbee-agent
+./scripts/feeds update packages
+make defconfig
+make package/qbee-agent/compile
 ```
 
+- Package is available in the `bin/package` file structure
+
 ```sh
-./scripts/feeds update -a
-./scripts/feeds install -a
-
-# Make sure to select the qbee-agent package for target under Administration
-make menuconfig
-
-make tools/install
-make toolchain/install
-
-make defconfig # or make menuconfig
-
-make package/qbee-agent/{clean,compile} V=s
+find bin/packages/ -name "qbee-agent*.ipk"
 ```
