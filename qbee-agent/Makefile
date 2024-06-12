@@ -1,11 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qbee-agent
-PKG_VERSION:=2024.19
+PKG_VERSION:=2024.23
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
 PKG_RELEASE:=1
-PKG_GIT_COMMIT:=9d0ed1bc1bab18c75a73dbacc2026e86113c97aa
+PKG_GIT_COMMIT:=3219c17730eab4c80598494732b4bed4c4c18b51
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_GIT_URL:=github.com/qbee-io/qbee-agent
@@ -34,7 +34,10 @@ define Package/qbee-agent
 endef
 
 define Package/qbee-agent/description
-	qbee.io is a SaaS provided fleet management solution
+	qbee.io is a SaaS provided fleet management solution. This package provides the agent
+	that runs on the device and communicates with the qbee.io server.
+	
+	https://qbee.io
 endef
 
 define Package/qbee-agent/install
