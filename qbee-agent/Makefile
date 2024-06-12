@@ -35,6 +35,8 @@ endef
 
 define Package/qbee-agent/description
 	qbee.io is a SaaS provided fleet management solution
+
+  https://qbee.io
 endef
 
 define Package/qbee-agent/install
